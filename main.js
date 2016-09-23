@@ -1,3 +1,5 @@
+new WOW().init();
+
 // init ScrollMagic Controller
 var controller = new ScrollMagic.Controller();
 
