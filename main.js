@@ -1,42 +1,69 @@
 new WOW().init();
 
+$(function() {
+    $('.chart').easyPieChart({
+        //your configuration goes here
+        animate: true
+    });
+});
+
 // init ScrollMagic Controller
 var controller = new ScrollMagic.Controller();
 
 // Scene Handler
 var scene1 = new ScrollMagic.Scene({
-  triggerElement: "#pinned-trigger1", // point of execution
-  duration: $(window).height() - 40, // pin element for the window height - 1
-  // triggerHook: 0, // don't trigger until #pinned-trigger1 hits the top of the viewport
-  reverse: true // allows the effect to trigger when scrolled in the reverse direction
+  triggerElement: "#trigger1"
 })
-.setPin("#pinned-element1") // the element we want to pin
+.setTween("#element1",0.5, { backgroundColor: 'green', scale: 2.5})
+.addIndicators({name:'animate 1'})
 .addTo(controller);
 
 // Scene2 Handler
 var scene2 = new ScrollMagic.Scene({
-  triggerElement: "#pinned-trigger2", // point of execution
-  duration: $(window).height() - 40 // pin the element for a total of 400px
+  triggerElement: "#trigger2",
+  duration: 300
 })
-.setPin("#pinned-element2") // the element we want to pin
+
+.setTween("#element2", {scale: .7})
+.addIndicators({name:'animate 2'})
 .addTo(controller);
 
 
 
 var scene3 = new ScrollMagic.Scene({
-  triggerElement: "#pinned-trigger3",
-  duration: $(window).height() - 40
+  triggerElement: "#trigger3",
+  duration: $(window).height() -250
 })
-// .setClassToggle("#animate1", "zap")
-
-.setPin("#pinned-element3")
-// .offset(200)
+.setPin('#element3')
+.addIndicators({name:'animate 3'})
 .addTo(controller);
+
+var tween = TweenMax.to("#element4", 0.5, {scale: 1.3, repeat: 5, yoyo: true});
+
 
 var scene4 = new ScrollMagic.Scene({
-  triggerElement: "#pinned-trigger4",
-  duration: 2000
-})
+  triggerElement: "#trigger4", duration: "100%"
+  })
+  .setTween(tween)
+  .addIndicators() // add indicators (requires plugin)
+  .addTo(controller);
 
-.setPin("#pinned-element4")
-.addTo(controller);
+
+// define movement of panels
+    var wipeAnimation = new TimelineMax()
+      .fromTo("section.panel.turqoise", 1, {x: "-100%"}, {x: "0%", ease: Linear.easeNone})  // in from left
+      .fromTo("section.panel.green",    1, {x:  "100%"}, {x: "0%", ease: Linear.easeNone})  // in from right
+      .fromTo("section.panel.bordeaux", 1, {y: "-100%"}, {y: "0%", ease: Linear.easeNone}); // in from top
+
+    // create scene to pin and link animation
+    new ScrollMagic.Scene({
+        triggerElement: "#pinContainer",
+        triggerHook: "onLeave",
+        duration: "300%"
+      })
+      .setPin("#pinContainer")
+      .setTween(wipeAnimation)
+      .addIndicators() // add indicators (requires plugin)
+      .addTo(controller);
+
+

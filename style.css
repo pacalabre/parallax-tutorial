@@ -31,19 +31,24 @@ section {
 }
 
 .blue {
+  background-color: #3883d8;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.blue {
+.blue-background {
   background-color: #3883d8;
 }
 .red {
   background-color: #cf3535;
+  background-size: cover;
+  background-repeat: no-repeat;
+
 }
 .orange {
   background-color: #ea6300;
+  background-color: #f7f9fc;
 }
 
 .green-background {
@@ -58,12 +63,42 @@ section {
   height:300%;
 }
 
+.line1 {
+  top:118;
+  position: absolute;
+  left:0;
+  right:0;
+  margin: 0 auto;
+  background-color: #ccc;
+  width: 2px;
+  height:35px;
+}
+
+.job-search-step {
+  margin: 40px 0px;
+  color: black;
+}
+
 /* Animations */
 
 #animate1 {
-      transition: transform 0.3s ease-out;
+      transition: transform 1s ease-out;
     }
 
 .zap {
-  transform: scale(2.5, 0);
+  transform: scale(2, 2.5);
+  transition: transform 1s ease-out;
+}
+
+.element-padding {
+  padding-top: 10%;
+}
+
+.element4 {
+  padding-top: 30%;
+}
+
+
+.black-text {
+  color: black;
 }
